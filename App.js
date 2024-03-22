@@ -7,6 +7,7 @@ import * as ImagePicker from "expo-image-picker";
 
 import * as mediaLibrary from "expo-media-library";
 
+import * as Sharing from "expo-sharing";
 export default function App() {
   /* State tradicional para armazenar a referência da foto (quando existir) */
   const [foto, setFoto] = useState(null);
@@ -54,6 +55,19 @@ export default function App() {
 
     console.log(imagem);
   };
+
+  const compartilhar = async () => {
+    if (foto) {
+      try {
+        await Sharing.shareAsync(foto);
+      } catch (error) {
+        console.error("Error sharing content:", error);
+      }
+    } else {
+      console.log("Nenhuma foto selecionada para compartilhar.");
+    }
+  };
+
   return (
     <>
       <StatusBar />
@@ -65,6 +79,8 @@ export default function App() {
         ) : (
           <Text>Sem Foto!</Text>
         )}
+
+        {foto && <Button title="Compartilhar" onPress={compartilhar} />}
       </View>
     </>
   );

@@ -5,3 +5,5 @@
 Documentação: https://docs.expo.dev/versions/latest/
 
 Instalação: `npx expo install expo-image-picker`
+
+Compartilhar: `npx expo install expo-sharing`
