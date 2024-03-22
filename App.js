@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 /* Importando os recursos da API nativa/móvel */
 import * as ImagePicker from "expo-image-picker";
 
+import * as mediaLibrary from "expo-media-library";
+
 export default function App() {
   /* State tradicional para armazenar a referência da foto (quando existir) */
   const [foto, setFoto] = useState(null);
@@ -45,6 +47,8 @@ export default function App() {
     });
 
     if (!imagem.canceled) {
+      /* Usando a api do mediaLibrary para salvar no armazenamento físico do dispositivo */
+      await mediaLibrary.saveToLibraryAsync(imagem.assets[0].uri);
       setFoto(imagem.assets[0].uri);
     }
 
